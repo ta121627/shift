@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="theme-color" content="#F9F9F9">
+<meta name="theme-color" content="#F9F9F9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1C1C1E" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <title>シフト表</title>
 <style>
   * {
@@ -137,15 +139,6 @@
   .work-name {
     font-size: 17px;
     font-weight: 400;
-  }
-  .work-badge {
-    margin-left: auto;
-    font-size: 12px;
-    font-weight: 600;
-    color: #FF9500;
-    background-color: #FFF6E5;
-    border-radius: 8px;
-    padding: 3px 8px;
   }
 
   .empty-state {
@@ -579,6 +572,86 @@
   .tab-item.active { color: #007AFF; }
   .tab-icon { width: 26px; height: 26px; }
   .tab-label { font-size: 10px; font-weight: 500; }
+
+  /* ===== Dark mode (iOS) ===== */
+  @media (prefers-color-scheme: dark) {
+    html, body {
+      background-color: #000000;
+      color: #FFFFFF;
+    }
+
+    .header {
+      background-color: rgba(28, 28, 30, 0.8);
+      border-bottom-color: #38383A;
+    }
+    .header-title { color: #FFFFFF; }
+    .header-btn { color: #0A84FF; }
+
+    .today-card,
+    .work-list,
+    .empty-state,
+    .grid-wrap,
+    .member-list,
+    .data-actions { background-color: #1C1C1E; }
+
+    .today-dow.weekday { color: #FFFFFF; }
+    .today-dow.sat { color: #0A84FF; }
+    .today-dow.sun { color: #FF453A; }
+
+    .work-row,
+    .member-row,
+    .data-btn { border-bottom-color: #38383A; }
+
+    .grid-head .name-col,
+    .grid-head .date-th,
+    .grid-body td,
+    .grid-total td { border-color: #38383A; }
+    .grid-total td { border-top-color: #38383A; }
+
+    .grid-head .dow-th.sat-h { color: #0A84FF; }
+    .grid-head .dow-th.sun-h { color: #FF453A; }
+    .grid-head .date-num { color: #FFFFFF; }
+    .grid-head .date-th.today .date-num { background-color: #0A84FF; color: #FFFFFF; }
+    .grid-head .today-col { background-color: rgba(10, 132, 255, 0.16); }
+    .grid-body td.today-cell,
+    .grid-total .total-num.today-cell { background-color: rgba(10, 132, 255, 0.10); }
+    .grid-total td { background-color: #161618; }
+
+    .off-mark { border-color: #48484A; }
+    .dot.edited { box-shadow: 0 0 0 2px #1C1C1E, 0 0 0 3.5px rgba(255, 255, 255, 0.3); }
+
+    .week-arrow { background-color: #1C1C1E; color: #0A84FF; }
+    .week-arrow:active { background-color: #2C2C2E; }
+    .week-month { color: #FFFFFF; }
+
+    .pill-btn { background-color: rgba(10, 132, 255, 0.22); color: #0A84FF; }
+    .pill-btn.reset { background-color: rgba(255, 69, 58, 0.20); color: #FF453A; }
+
+    .chevron { color: #48484A; }
+    .data-btn { color: #0A84FF; }
+
+    .sheet { background-color: #1C1C1E; }
+    .sheet-handle { background-color: #48484A; }
+    .sheet-cancel, .sheet-save { color: #0A84FF; }
+
+    .text-input,
+    .color-row,
+    .day-toggle,
+    .delete-btn { background-color: #2C2C2E; }
+    .text-input { color: #FFFFFF; }
+    .text-input::placeholder { color: #8E8E93; }
+    .day-toggle { border-color: #2C2C2E; color: #636366; }
+    .day-toggle.on { background-color: #0A84FF; border-color: #0A84FF; color: #FFFFFF; }
+    .delete-btn { color: #FF453A; }
+
+    .tab-bar {
+      background-color: rgba(28, 28, 30, 0.8);
+      border-top-color: #38383A;
+    }
+    .tab-item.active { color: #0A84FF; }
+
+    .toast { background-color: rgba(70, 70, 72, 0.96); }
+  }
 </style>
 </head>
 <body>
@@ -788,11 +861,9 @@
     }
     var html = '<div class="work-list">';
     working.forEach(function(x){
-      var badge = isEdited(x, now) ? '<span class="work-badge">変更あり</span>' : '';
       html += '<div class="work-row">'
         + '<div class="avatar" style="background-color:'+x.color+'">'+escapeHtml(initial(x.name))+'</div>'
         + '<div class="work-name">'+escapeHtml(x.name)+'</div>'
-        + badge
         + '</div>';
     });
     html += '</div>';
