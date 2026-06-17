@@ -1,6 +1,6 @@
 {
-  "name": "シフト表",
-  "short_name": "シフト表",
+  "name": "シフト管理表",
+  "short_name": "シフト管理表",
   "description": "週間シフトを管理するアプリ",
   "lang": "ja",
   "start_url": "./",
